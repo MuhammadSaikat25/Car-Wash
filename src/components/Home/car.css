@@ -1,0 +1,15 @@
+@keyframes grow-shrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.car-animation {
+  animation: grow-shrink 10s ease-in-out infinite; 
+}
