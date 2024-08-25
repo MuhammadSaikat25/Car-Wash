@@ -62,7 +62,7 @@ const Navbar = () => {
             }
             to={"w"}
           >
-            Blog
+            Booking
           </NavLink>
           <NavLink
             className={({ isActive }) =>
