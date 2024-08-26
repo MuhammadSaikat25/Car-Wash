@@ -12,10 +12,10 @@ export const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-    registration: builder.mutation({
+    sing_up: builder.mutation({
       query: (userInfo) => {
         return {
-          url: "/register-user",
+          url: "/auth/signup",
           method: "POST",
           body: userInfo,
         };
@@ -24,4 +24,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useRegistrationMutation } = authApi;
+export const { useLoginMutation, useSing_upMutation } = authApi;

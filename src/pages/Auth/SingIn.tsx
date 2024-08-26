@@ -27,24 +27,25 @@ const SingIn = () => {
         steErrorMessage("");
         console.log("An unexpected error occurred:", res.error);
       }
-    }else{
+    } else {
       steErrorMessage("");
     }
 
     const jwt = !error && (await decodeJwt(res?.data?.data.jwtToken as string));
     dispatch(setUser({ user: jwt, token: res?.data?.token }));
-    navigate('/')
+    navigate("/");
   };
 
   return (
     <div className="relative">
-      <div className="w-[27%] lg:w-[35%] bg-[#B4E380] h-screen"></div>
-      <div className="absolute lg:left-[10%] top-[15%] z-50 md:h-[50%] lg:h-[70%] bg-white w-[80%] shadow-2xl shadow-black">
-        <div className="bg-[#B4E380] w-[34%] md:w-[34%] lg:w-[31.2%] h-full">
+      <div className=" hidden md:block md:w-[27%] lg:w-[35%] bg-[#B4E380] h-screen"></div>
+
+      <div className="h-screen w-full md:absolute lg:left-[10%] md:top-[15%] z-50 md:h-[50%] lg:h-[70%] bg-white md:w-[90%] lg:w-[80%] shadow-2xl shadow-black">
+        <div className="bg-[#B4E380] w-full  md:w-[30%] lg:w-[31.2%] h-full">
           <img className="w-full h-full object-contain" src={car} alt="" />
         </div>
 
-        <div className="absolute top-2 lg:left-[35%] lg:w-[50%]">
+        <div className="absolute lg:top-2 lg:left-[35%] lg:w-[50%] bg-gray-700 bg-opacity-30 top-[25%] md:left-[30%] md:top-[10%] left-[10%] md:bg-white p-10 rounded lg:p-0 ">
           <div className="flex items-center gap-2">
             <h1 className="lg:text-4xl font-semibold text-gray-600">
               Login to
@@ -67,9 +68,7 @@ const SingIn = () => {
                 placeholder="Password"
               />
               {isLoading ? (
-                <p className="text-blue-700 font-bold text-center">
-                  loading ...
-                </p>
+                <p className="text-blue-400 font-semibold text-center">loading...</p>
               ) : (
                 <button className="bg-blue-500 duration-300 hover:bg-blue-950 text-white px-4 py-1 rounded-full w-full">
                   Sing in
@@ -78,7 +77,9 @@ const SingIn = () => {
               <div className="flex items-center gap-x-1 justify-between">
                 <h1 className="text-red-400 font-semibold">{errorMessage}</h1>
                 <div className="flex items-center gap-1">
-                  <h1 className="text-gray-900 font-semibold">New at carspa</h1>
+                  <h1 className="text-gray-900 font-semibold">
+                   New at Carspa
+                  </h1>
                   <Link className="text-blue-500 font-semibold" to={"/sing-up"}>
                     Sing up
                   </Link>
