@@ -28,7 +28,9 @@ const FaqUi = () => {
 
   return (
     <div className="bg-[#e6e6eb] ">
-        <h1 className="text-center font-semibold text-3xl text-gray-950 py-10">Have Any Questions?</h1>
+      <h1 className="text-center font-semibold text-3xl text-gray-950 py-10">
+        Have Any Questions?
+      </h1>
       <div className="p-4 md:flex items-center justify-center mx-auto gap-x-20">
         <div className="car-animation lg:w-[400px]">
           <img className="" src={car} alt="Car" />

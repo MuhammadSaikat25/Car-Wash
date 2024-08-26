@@ -22,14 +22,15 @@ const Banner = () => {
             </span>
           </p>
         </div>
-      </div>
-      <div
-        className="w-[120px] h-[40px] bg-red-700 relative -top-[150px] md:-top-[100px] lg:-top-[150px] left-[45%] bg-cover bg-center rounded-md"
-        style={{ backgroundImage: `url(${asset})` }}
-      >
-        <button className="absolute top-[7px] left-[14px] text-white">
-          Book Service
-        </button>
+        {/* -------------- btn------------ */}
+        <div
+          className="w-[120px] h-[40px] bg-red-700 relative left-[30%] top-10 md:left-[80%] bg-cover bg-center rounded-md"
+          style={{ backgroundImage: `url(${asset})` }}
+        >
+          <button className="absolute top-[7px] left-[14px] text-white">
+            Book Service
+          </button>
+        </div>
       </div>
     </div>
   );

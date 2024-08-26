@@ -68,7 +68,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
             }
-            to={"w"}
+            to={"/sing-in"}
           >
             Sing in
           </NavLink>
@@ -76,7 +76,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
             }
-            to={"w"}
+            to={"/sing-up"}
           >
             Sing up
           </NavLink>
