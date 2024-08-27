@@ -30,7 +30,6 @@ const SingIn = () => {
     } else {
       steErrorMessage("");
     }
-
     const jwt = !error && (await decodeJwt(res?.data?.data.jwtToken as string));
     dispatch(setUser({ user: jwt, token: res?.data?.token }));
     navigate("/");
@@ -68,7 +67,9 @@ const SingIn = () => {
                 placeholder="Password"
               />
               {isLoading ? (
-                <p className="text-blue-400 font-semibold text-center">loading...</p>
+                <p className="text-blue-400 font-semibold text-center">
+                  loading...
+                </p>
               ) : (
                 <button className="bg-blue-500 duration-300 hover:bg-blue-950 text-white px-4 py-1 rounded-full w-full">
                   Sing in
@@ -77,9 +78,7 @@ const SingIn = () => {
               <div className="flex items-center gap-x-1 justify-between">
                 <h1 className="text-red-400 font-semibold">{errorMessage}</h1>
                 <div className="flex items-center gap-1">
-                  <h1 className="text-gray-900 font-semibold">
-                   New at Carspa
-                  </h1>
+                  <h1 className="text-gray-900 font-semibold">New at Carspa</h1>
                   <Link className="text-blue-500 font-semibold" to={"/sing-up"}>
                     Sing up
                   </Link>

@@ -1,6 +1,6 @@
 import Banner from "../../components/Home/Banner";
 import Faq from "../../components/Home/Faq";
-import Service from "../../components/Home/services/Service";
+import FeaturedService from "../../components/Home/FeaturedService";
 
 const Home = () => {
   return (
@@ -9,7 +9,7 @@ const Home = () => {
         <Banner />
       </section>
       <Faq />
-      <Service/>
+      <FeaturedService />
     </div>
   );
 };
