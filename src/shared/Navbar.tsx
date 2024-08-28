@@ -1,11 +1,16 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useEffect, useState } from "react";
-
+import { FaRegUserCircle } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
+import { logOut } from "../redux/feature/auth/authSlice";
 const Navbar = () => {
   const [scroll, setScroll] = useState(0);
   const { pathname } = useLocation();
-
+  const user = useAppSelector((state: RootState) => state.auth.user);
+  const dispatch = useAppDispatch();
+  const [modal, setModal] = useState(false);
   const handleScroll = () => {
     setScroll(window.scrollY);
   };
@@ -16,7 +21,7 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
     <div className="">
       <div
@@ -70,22 +75,43 @@ const Navbar = () => {
           >
             Booking
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
-            }
-            to={"/sing-in"}
-          >
-            Sing in
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
-            }
-            to={"/sing-up"}
-          >
-            Sing up
-          </NavLink>
+          <div className="relative cursor-pointer ">
+            {user ? (
+              <FaRegUserCircle size={20} onClick={() => setModal(!modal)} />
+            ) : (
+              <div className="flex items-center gap-x-2">
+                <NavLink
+                  className={({ isActive }) =>
+                    `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
+                  }
+                  to={"/sing-in"}
+                >
+                  Sing in
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
+                  }
+                  to={"/sing-up"}
+                >
+                  Sing up
+                </NavLink>
+              </div>
+            )}
+            {modal && (
+              <div className="absolute top-10  right-0 bg-[#E8B86D] p-2 rounded text-gray-600 font-semibold">
+                <button
+                  onClick={() => {
+                    dispatch(logOut());
+                    setModal(false);
+                  }}
+                >
+                  Logout
+                </button>
+                <Link to={"/user/dashboard"}>Dashboard</Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

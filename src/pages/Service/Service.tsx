@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import img from "../../assets/image_03.jpg";
 import { useGetServicesQuery } from "../../redux/feature/service/serviceApi";
 import { FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Service = () => {
+  const navigate = useNavigate();
   const [services, setServices] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState<string[]>([]);
   const [search, setSearch] = useState("");
@@ -50,7 +52,7 @@ const Service = () => {
               <FaArrowRight color="white" />
             </p>
           </div>
-          <div className="h-[100px] overflow-hidden overflow-y-scroll bg-green-300  relative w-fit  p-2 rounded ">
+          <div className="h-[100px] overflow-hidden overflow-y-scroll bg-green-300  relative w-fit  p-2 rounded scroll-container">
             {data?.data?.uniqDuration?.map((service: any, i: number) => (
               <div key={i} className="">
                 <input
@@ -97,7 +99,10 @@ const Service = () => {
                     <p>Duration {service.duration} mins</p>
                     <p>Price: ${service?.price}</p>
                   </div>
-                  <button className="w-full bg-[#414347] text-gray-200">
+                  <button
+                    onClick={() => navigate(`/service-details/${service._id}`)}
+                    className="w-full bg-[#414347] text-gray-200"
+                  >
                     Details
                   </button>
                 </div>

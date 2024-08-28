@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import SingUp from "../pages/Auth/SingUp";
 import SingIn from "../pages/Auth/SingIn";
 import Service from "../pages/Service/Service";
+import ServiceDetails from "../pages/serviceDetails/ServiceDetails";
 
 const router = createBrowserRouter([
   {
@@ -15,19 +16,23 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path:'/service',
-        element:<Service/>
-      }
+        path: "/service",
+        element: <Service />,
+      },
+      {
+        path: "/service-details/:id",
+        element: <ServiceDetails />,
+      },
     ],
   },
   {
-    path:'/sing-up',
-    element:<SingUp/>
+    path: "/sing-up",
+    element: <SingUp />,
   },
   {
-    path:'/sing-in',
-    element:<SingIn/>
-  }
+    path: "/sing-in",
+    element: <SingIn />,
+  },
 ]);
 
 export default router;

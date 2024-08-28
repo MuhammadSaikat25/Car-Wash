@@ -22,7 +22,25 @@ const serviceApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSingleService: builder.query({
+      query: (id) => {
+        return {
+          url: `/services/${id}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+    }),
+    getServiceSlot: builder.query({
+      query: (id) => {
+        return {
+          url: `/serviceSlot/${id}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetServicesQuery } = serviceApi;
+export const { useGetServicesQuery, useGetSingleServiceQuery,useGetServiceSlotQuery } = serviceApi;
