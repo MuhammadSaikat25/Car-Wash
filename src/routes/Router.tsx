@@ -5,6 +5,7 @@ import SingUp from "../pages/Auth/SingUp";
 import SingIn from "../pages/Auth/SingIn";
 import Service from "../pages/Service/Service";
 import ServiceDetails from "../pages/serviceDetails/ServiceDetails";
+import BookingPage from "../pages/Booking/BookingPage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: "/service-details/:id",
         element: <ServiceDetails />,
       },
+      {
+        path:"/booking-page/:slot",
+        element:<BookingPage/>
+      }
     ],
   },
   {

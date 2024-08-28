@@ -48,7 +48,7 @@ const ServiceDetails = () => {
 
   const nweDate = new Date();
   const currentDate = nweDate.toISOString().split("T")[0];
-
+  console.log(selectedSlot);
   return (
     <div className="pt-[62px] gap-x-7 bg-[#FFFFFF] text-gray-950 mb-20">
       {/* --------------- Banner image------------- */}
@@ -113,7 +113,7 @@ const ServiceDetails = () => {
               className="h-[300px] w-[700px] object-cover rounded"
               alt=""
             />
-            <h1 className="font-semibold">{service?.name}</h1>
+            <h1 className="font-semibold my-2">{service?.name}</h1>
             <h1 className="font-semibold">{service?.description}</h1>
             <h1>Duration: {service?.duration} mins</h1>
             <h1>Price: ${service?.price}</h1>
@@ -154,7 +154,7 @@ const ServiceDetails = () => {
                             disabled={slot.isBooked === "booked"}
                           />
                           <label htmlFor="">
-                            {slot?.date} | start: {slot?.startTime}-end:{" "}
+                            {slot?.date} | start: {slot?.startTime}-end:
                             {slot?.endTime}
                           </label>
                         </div>
@@ -167,7 +167,19 @@ const ServiceDetails = () => {
           </div>
 
           {selectedSlot?.length ? (
-            <div className="mt-4">Booking Service</div>
+            // /booking-page/:date/:slot
+            <div
+              className="mt-4"
+              onClick={() =>
+                navigate(
+                  `/booking-page/${encodeURIComponent(
+                    JSON.stringify(selectedSlot)
+                  )}`
+                )
+              }
+            >
+              Booking Service
+            </div>
           ) : (
             ""
           )}
