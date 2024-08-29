@@ -6,6 +6,9 @@ import SingIn from "../pages/Auth/SingIn";
 import Service from "../pages/Service/Service";
 import ServiceDetails from "../pages/serviceDetails/ServiceDetails";
 import BookingPage from "../pages/Booking/BookingPage";
+import AdminLayout from "../layout/AdminLayout";
+import Admin from "../pages/Dashboard/Admin/Admin";
+import ServiceManagement from "../pages/Dashboard/Admin/ServiceManagement";
 
 const router = createBrowserRouter([
   {
@@ -25,9 +28,9 @@ const router = createBrowserRouter([
         element: <ServiceDetails />,
       },
       {
-        path:"/booking-page/:serviceId/:slots",
-        element:<BookingPage/>
-      }
+        path: "/booking-page/:serviceId/:slots",
+        element: <BookingPage />,
+      },
     ],
   },
   {
@@ -37,6 +40,20 @@ const router = createBrowserRouter([
   {
     path: "/sing-in",
     element: <SingIn />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "/admin/hero",
+        element: <Admin />,
+      },
+      {
+        path:"/admin/service-management",
+        element:<ServiceManagement/>
+      }
+    ],
   },
 ]);
 

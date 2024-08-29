@@ -108,7 +108,7 @@ const Navbar = () => {
                 >
                   Logout
                 </button>
-                <Link to={"/user/dashboard"}>Dashboard</Link>
+                <Link to={"/admin/hero"}>Dashboard</Link>
               </div>
             )}
           </div>

@@ -10,6 +10,7 @@ import { RootState } from "../../redux/store";
 import { IoLocation } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import { IoTime } from "react-icons/io5";
+import { loadStripe } from "@stripe/stripe-js";
 
 const BookingPage = () => {
   const { slots, serviceId } = useParams();
@@ -43,7 +44,26 @@ const BookingPage = () => {
         item1.endTime === item2.endTime
     )
   );
+  const handelPayment = async () => {
+    const stripe = await loadStripe(import.meta.env.VITE_PK);
 
+    const body = {
+      serviceId,
+      bookingTime,
+    };
+    const res = await fetch(`${import.meta.env.VITE_SERVER}/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const session = await res.json();
+    const result=stripe?.redirectToCheckout({
+      sessionId:session.id
+    })
+    console.log(result);
+  };
   return (
     <div className="pt-[62px]">
       <img
@@ -135,7 +155,7 @@ const BookingPage = () => {
                   />
                 </div>
               ))}
-              <button>Pay Now</button>
+              <button onClick={handelPayment}>Pay Now</button>
             </form>
           </div>
         </div>
