@@ -48,7 +48,7 @@ const ServiceDetails = () => {
 
   const nweDate = new Date();
   const currentDate = nweDate.toISOString().split("T")[0];
-  console.log(selectedSlot);
+
   return (
     <div className="pt-[62px] gap-x-7 bg-[#FFFFFF] text-gray-950 mb-20">
       {/* --------------- Banner image------------- */}
@@ -147,14 +147,14 @@ const ServiceDetails = () => {
                         <div key={i}>
                           <input
                             type="checkbox"
-                            name={slot?.date}
-                            id={slot?.date}
+                            name={`${slot.date}|${slot?.startTime}|${slot?.endTime}`}
+                            id={slot?._id}
                             onChange={handleCheckboxChange}
                             defaultChecked={slot.isBooked === "booked"}
                             disabled={slot.isBooked === "booked"}
                           />
                           <label htmlFor="">
-                            {slot?.date} | start: {slot?.startTime}-end:
+                            {slot?.date} | start: {slot?.startTime}-end:{" "}
                             {slot?.endTime}
                           </label>
                         </div>
@@ -167,12 +167,11 @@ const ServiceDetails = () => {
           </div>
 
           {selectedSlot?.length ? (
-            // /booking-page/:date/:slot
             <div
               className="mt-4"
               onClick={() =>
                 navigate(
-                  `/booking-page/${encodeURIComponent(
+                  `/booking-page/${service._id}/${encodeURIComponent(
                     JSON.stringify(selectedSlot)
                   )}`
                 )
@@ -183,7 +182,7 @@ const ServiceDetails = () => {
           ) : (
             ""
           )}
-
+          {/* ---------- calender --------------- */}
           <div className="w-full mt-4">
             <input
               type="date"
