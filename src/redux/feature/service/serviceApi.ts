@@ -21,6 +21,7 @@ const serviceApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["services"],
     }),
     getSingleService: builder.query({
       query: (id) => {
@@ -40,7 +41,45 @@ const serviceApi = baseApi.injectEndpoints({
         };
       },
     }),
+    postService: builder.mutation({
+      query: (data) => {
+        return {
+          url: "services",
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+    }),
+    updateService: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/services/${id}`,
+          method: "PUT",
+          body: formData,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["services"],
+    }),
+    deleteService: builder.mutation({
+      query: (id) => {
+        console.log(id)
+        return {
+          url: `/services/${id}`,
+          method: "DELETE",
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetServicesQuery, useGetSingleServiceQuery,useGetServiceSlotQuery } = serviceApi;
+export const {
+  useGetServicesQuery,
+  useGetSingleServiceQuery,
+  useGetServiceSlotQuery,
+  usePostServiceMutation,
+  useUpdateServiceMutation,
+  useDeleteServiceMutation,
+} = serviceApi;

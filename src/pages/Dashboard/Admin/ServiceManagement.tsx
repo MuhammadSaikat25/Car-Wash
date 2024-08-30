@@ -1,4 +1,4 @@
-import ServiceM from "../../../components/Dashboard/Admin/ServiceM";
+import ServiceM from "../../../components/Dashboard/Admin/manage-services/ServiceM";
 
 const ServiceManagement = () => {
   return (
