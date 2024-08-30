@@ -1,4 +1,4 @@
-import React from 'react';
+
 import AdminHero from '../../../components/Dashboard/Admin/AdminHero';
 
 const Admin = () => {

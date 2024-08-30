@@ -17,7 +17,7 @@ const CreateService = ({ setModal }: Props) => {
     search: "",
     sortOrder: "",
   });
-  const [postService, { isSuccess, isError, error }] = usePostServiceMutation();
+  const [postService, { isSuccess, isError, }] = usePostServiceMutation();
   const [offer, setOffer] = useState([{ offers: "" }]);
   const [formData, setFormData] = useState({
     name: "",

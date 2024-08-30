@@ -5,14 +5,14 @@ import { useState } from "react";
 import { useSing_upMutation } from "../../redux/feature/auth/authApi";
 
 const SingUp = () => {
-  const [sing_up, { data }] = useSing_upMutation(undefined);
+  const [sing_up] = useSing_upMutation(undefined);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [errorMessage, steErrorMessage] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const handelSineUp = async (e: any) => {
     e.preventDefault();
     const res = await sing_up({
@@ -35,7 +35,7 @@ const SingUp = () => {
     } else {
       steErrorMessage("");
     }
-    navigate('/sing-in')
+    navigate("/sing-in");
   };
   return (
     <div className="relative">

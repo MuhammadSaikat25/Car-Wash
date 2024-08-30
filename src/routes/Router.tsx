@@ -9,6 +9,7 @@ import BookingPage from "../pages/Booking/BookingPage";
 import AdminLayout from "../layout/AdminLayout";
 import Admin from "../pages/Dashboard/Admin/Admin";
 import ServiceManagement from "../pages/Dashboard/Admin/ServiceManagement";
+import AllBooking from "../pages/Dashboard/Admin/AllBooking";
 
 const router = createBrowserRouter([
   {
@@ -50,9 +51,13 @@ const router = createBrowserRouter([
         element: <Admin />,
       },
       {
-        path:"/admin/service-management",
-        element:<ServiceManagement/>
-      }
+        path: "/admin/service-management",
+        element: <ServiceManagement />,
+      },
+      {
+        path: "/admin/user-booking",
+        element: <AllBooking />,
+      },
     ],
   },
 ]);
