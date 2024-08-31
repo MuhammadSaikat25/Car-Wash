@@ -10,6 +10,7 @@ import AdminLayout from "../layout/AdminLayout";
 import Admin from "../pages/Dashboard/Admin/Admin";
 import ServiceManagement from "../pages/Dashboard/Admin/ServiceManagement";
 import AllBooking from "../pages/Dashboard/Admin/AllBooking";
+import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/user-booking",
         element: <AllBooking />,
+      },
+      {
+        path: "/admin/user-management",
+        element: <ManageUser />,
       },
     ],
   },

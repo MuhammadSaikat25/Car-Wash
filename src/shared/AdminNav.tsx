@@ -6,6 +6,7 @@ const AdminNav = () => {
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/admin/service-management"}>Service</NavLink>
       <NavLink to={"/admin/user-booking"}>Booking</NavLink>
+      <NavLink to={"/admin/user-management"}>User</NavLink>
     </div>
   );
 };

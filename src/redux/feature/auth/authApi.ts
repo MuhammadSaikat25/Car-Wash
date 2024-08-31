@@ -21,7 +21,31 @@ export const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllUser: builder.query({
+      query: () => {
+        return {
+          url: "get-all-user",
+          method: "GET",
+          credentials: "include",
+        };
+      },
+    }),
+    updateUserRole: builder.mutation({
+      query: ({ id, role }) => {
+        return {
+          url: `/update-role/${id}`,
+          method: "PUT",
+          body: { role },
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useSing_upMutation } = authApi;
+export const {
+  useLoginMutation,
+  useSing_upMutation,
+  useGetAllUserQuery,
+  useUpdateUserRoleMutation,
+} = authApi;
