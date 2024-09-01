@@ -42,16 +42,16 @@ const AllBooking = () => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.customer.name}
+                  {row?.customer?.name}
                 </TableCell>
-                <TableCell align="right">{row.serviceId.price}</TableCell>
+                <TableCell align="right">{row?.serviceId?.price}</TableCell>
                 <TableCell align="right">
                   {row.serviceId.duration} mins
                 </TableCell>
-                <TableCell align="right">{row.serviceId.name} </TableCell>
-                <TableCell align="right">{row.slotId.date} </TableCell>
-                <TableCell align="right">{row.slotId.startTime} </TableCell>
-                <TableCell align="right">{row.slotId.endTime} </TableCell>
+                <TableCell align="right">{row?.serviceId?.name} </TableCell>
+                <TableCell align="right">{row?.slotId?.date} </TableCell>
+                <TableCell align="right">{row?.slotId?.startTime} </TableCell>
+                <TableCell align="right">{row?.slotId?.endTime} </TableCell>
               </TableRow>
             ))}
           </TableBody>

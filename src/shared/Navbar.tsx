@@ -5,6 +5,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
 import { logOut } from "../redux/feature/auth/authSlice";
+import ImmediateNextSlot from "../components/Dashboard/User/ImmediateNextSlot";
 const Navbar = () => {
   const [scroll, setScroll] = useState(0);
   const { pathname } = useLocation();
@@ -108,10 +109,15 @@ const Navbar = () => {
                 >
                   Logout
                 </button>
-                <Link to={"/admin/hero"}>Dashboard</Link>
+                {user?.role === "admin" ? (
+                  <Link to={"/admin/hero"}>Dashboard</Link>
+                ) : (
+                  <Link to={"/user/Profile"}>Dashboard</Link>
+                )}
               </div>
             )}
           </div>
+          <ImmediateNextSlot />
         </div>
       </div>
     </div>

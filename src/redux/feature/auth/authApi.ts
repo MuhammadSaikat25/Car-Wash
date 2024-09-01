@@ -43,6 +43,25 @@ export const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateProfile: builder.mutation({
+      query: ({ email, data }) => {
+        console.log({ email, data });
+        return {
+          url: `/update-profile/${email}`,
+          method: "PUT",
+          body: data,
+        };
+      },
+    }),
+    getMe: builder.query({
+      query: (email) => {
+        console.log(email)
+        return {
+          url: `/getMe/${email}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -51,4 +70,6 @@ export const {
   useSing_upMutation,
   useGetAllUserQuery,
   useUpdateUserRoleMutation,
+  useUpdateProfileMutation,
+  useGetMeQuery
 } = authApi;

@@ -12,6 +12,10 @@ import ServiceManagement from "../pages/Dashboard/Admin/ServiceManagement";
 import AllBooking from "../pages/Dashboard/Admin/AllBooking";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 import ManageSlot from "../pages/Dashboard/Admin/ManageSlot";
+import UserHero from "../components/Dashboard/User/UserHero";
+import UserLayout from "../layout/UserLayout";
+import UserProfile from "../components/Dashboard/User/UserProfile";
+import UserBooking from "../pages/Dashboard/User/UserBooking";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +72,24 @@ const router = createBrowserRouter([
         path: "/admin/manage-slot",
         element: <ManageSlot />,
       },
+    ],
+  },
+  {
+    path: "/user",
+    element: <UserLayout />,
+    children: [
+      {
+        path: "/user/hero",
+        element: <UserHero />,
+      },
+      {
+        path:"/user/Profile",
+        element:<UserProfile/>
+      },
+      {
+        path:"/user/booking",
+        element:<UserBooking/>
+      }
     ],
   },
 ]);

@@ -1,6 +1,7 @@
 import banner from "../../assets/banner.jpg";
 import img from "../../assets/Ellipse.png";
 import asset from "../../assets/Asset.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -27,9 +28,12 @@ const Banner = () => {
           className="w-[120px] h-[40px] bg-red-700 relative left-[30%] top-10 md:left-[80%] bg-cover bg-center rounded-md"
           style={{ backgroundImage: `url(${asset})` }}
         >
-          <button className="absolute top-[7px] left-[14px] text-white">
+          <Link
+            to={"/service"}
+            className="absolute top-[7px] left-[14px] text-white"
+          >
             Book Service
-          </button>
+          </Link>
         </div>
       </div>
     </div>
