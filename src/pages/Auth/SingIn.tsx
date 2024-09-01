@@ -34,7 +34,10 @@ const SingIn = () => {
     !error && (await decodeJwt(res?.data?.data.jwtToken as string));
 
     dispatch(
-      setUser({ user: res?.data?.data?.result, token: res?.data?.token })
+      setUser({
+        user: res?.data?.data?.result,
+        token: res?.data?.data.jwtToken,
+      })
     );
     navigate("/");
   };

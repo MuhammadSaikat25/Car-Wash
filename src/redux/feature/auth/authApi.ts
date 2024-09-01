@@ -31,12 +31,15 @@ export const authApi = baseApi.injectEndpoints({
       },
     }),
     updateUserRole: builder.mutation({
-      query: ({ id, role }) => {
+      query: ({ id, role, jwt }) => {
         return {
           url: `/update-role/${id}`,
           method: "PUT",
           body: { role },
-          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
         };
       },
     }),
