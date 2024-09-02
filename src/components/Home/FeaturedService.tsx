@@ -16,7 +16,7 @@ const FeaturedService = () => {
           <h1 className="text-center text-2xl text-gray-600 font-semibold">
             Featured Services
           </h1>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 w-fit mx-auto">
             {services?.slice(0, 6).map((service: any) => (
               <div
                 className="border border-blue-500 w-[250px]"

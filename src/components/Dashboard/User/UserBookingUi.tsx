@@ -8,9 +8,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import UpComingBooking from "./UpComingBooking";
+import { useAppSelector } from "../../../redux/hooks";
+import { RootState } from "../../../redux/store";
 
 const UserBookingUi = () => {
+  const user=useAppSelector((state:RootState)=>state.auth.user)
   const { data } = useGetUserBookingQuery(undefined);
+  console.log(data?.data)
   const [toggleBooking, setToggleBooking] = useState("upcoming");
   const [myBooking, setMyBooking] = useState<any>([]);
   useEffect(() => {
@@ -23,7 +27,7 @@ const UserBookingUi = () => {
     setMyBooking(filteredBookings);
   }, [data]);
   const rows = myBooking;
-
+  console.log(rows)
   return (
     <div className="p-2">
       <div className="flex items-center gap-x-2 justify-center mb-3">

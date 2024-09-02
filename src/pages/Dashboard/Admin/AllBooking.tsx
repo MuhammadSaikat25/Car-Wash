@@ -16,7 +16,7 @@ const AllBooking = () => {
     setAllBooking(data?.data);
   }, [data]);
   const rows = allBooking;
-
+console.log(rows)
   return (
     <div className="h-screen relative bg-stone-200 lg:px-20 pt-20 p-3">
       <TableContainer
@@ -44,14 +44,14 @@ const AllBooking = () => {
                 <TableCell component="th" scope="row">
                   {row?.customer?.name}
                 </TableCell>
-                <TableCell align="right">{row?.serviceId?.price}</TableCell>
+                <TableCell align="right">{row?.serviceId?.price*row.slotId.length}</TableCell>
                 <TableCell align="right">
                   {row.serviceId.duration} mins
                 </TableCell>
                 <TableCell align="right">{row?.serviceId?.name} </TableCell>
-                <TableCell align="right">{row?.slotId?.date} </TableCell>
-                <TableCell align="right">{row?.slotId?.startTime} </TableCell>
-                <TableCell align="right">{row?.slotId?.endTime} </TableCell>
+                <TableCell align="right">{row?.slotId?.map((a)=>(<p key={a} className=" flex flex-col"> {a.date}</p>))} </TableCell>
+                <TableCell align="right">{row?.slotId?.map((a)=>(<p key={a} className=" flex flex-col"> {a.startTime}</p>))}  </TableCell>
+                <TableCell align="right">{row?.slotId?.map((a)=>(<p key={a} className=" flex flex-col"> {a.endTime}</p>))}  </TableCell>
               </TableRow>
             ))}
           </TableBody>

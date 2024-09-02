@@ -10,6 +10,7 @@ const Home = () => {
       </section>
       <Faq />
       <FeaturedService />
+     
     </div>
   );
 };

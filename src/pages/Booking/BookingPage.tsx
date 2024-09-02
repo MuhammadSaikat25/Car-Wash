@@ -11,6 +11,8 @@ import { IoLocation } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import { IoTime } from "react-icons/io5";
 import { loadStripe } from "@stripe/stripe-js";
+import BookingService from "./payment/BookingService";
+import asset from "../../assets/Asset.png";
 
 const BookingPage = () => {
   const { slots, serviceId } = useParams();
@@ -22,7 +24,7 @@ const BookingPage = () => {
   const { data } = useGetSingleServiceQuery(serviceId, { skip: !serviceId });
   const [service, setService] = useState<any>();
   const [slot, setSlot] = useState<any>([]);
-
+  const [bookingModal, setBookingModal] = useState(false);
   useEffect(() => {
     setService(data?.data);
     setSlot(allSlot?.data);
@@ -44,26 +46,15 @@ const BookingPage = () => {
         item1.endTime === item2.endTime
     )
   );
-  const handelPayment = async () => {
-    const stripe = await loadStripe(import.meta.env.VITE_PK);
-
-    const body = {
-      serviceId,
-      bookingTime,
-    };
-    const res = await fetch(`${import.meta.env.VITE_SERVER}/payment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    const session = await res.json();
-    const result=stripe?.redirectToCheckout({
-      sessionId:session.id
-    })
-    console.log(result);
+  const handelPayment = async (e: any) => {
+    e.preventDefault();
+    setBookingModal(true);
   };
+  const bookingData = {
+    serviceId,
+    bookingTime,
+  };
+
   return (
     <div className="pt-[62px]">
       <img
@@ -71,7 +62,10 @@ const BookingPage = () => {
         className="w-full h-[250px] object-cover"
         alt=""
       />
-      <div className="p-10">
+      <div
+        className="bg-[#015496] pt-10"
+        style={{ backgroundImage: `url(${asset})` }}
+      >
         <div className="flex flex-wrap gap-3 items-center justify-center gap-x-4 mb-10">
           <div className="bg-white hover:bg-rose-500 hover:text-white shadow-blue-300 text-center shadow-md w-[300px] p-10 rounded-md h-fit">
             <p className="bg-red-800 w-[40px] h-[40px] rounded-full relative mx-auto">
@@ -111,13 +105,13 @@ const BookingPage = () => {
           </div>
         </div>
         {/* ----------------------- */}
-        <div className="max-w-7xl mx-auto flex gap-x-5 items-start">
-          <div className="w-fit">
+        <div className="flex gap-x-5 items-start justify-center p-5  ">
+          <div className="w-fit  text-white">
             <img className="w-full h-[150px] rounded" src={img} alt="" />
             <h1 className="font-semibold my-2">{service?.name}</h1>
             <h1 className="font-semibold">{service?.description}</h1>
             <h1>Duration: {service?.duration} mins</h1>
-            <h1>Price: ${service?.price}</h1>
+
             {bookingTime?.map((slot: any, i: number) => (
               <div key={i} className="">
                 <h1>
@@ -131,8 +125,11 @@ const BookingPage = () => {
             </section>
           </div>
           {/* ------------------- */}
-          <div className=" w-full h-fit">
-            <form className="w-full p-3 flex flex-col gap-y-3 lg:w-[50%]">
+          <div className=" w-[30%] h-fit p-3">
+            <form
+              onSubmit={handelPayment}
+              className="w-full p-3 flex flex-col gap-y-3 "
+            >
               <input
                 type="text"
                 value={user?.name}
@@ -155,11 +152,14 @@ const BookingPage = () => {
                   />
                 </div>
               ))}
-              <button onClick={handelPayment}>Pay Now</button>
+              <button className="bg-blue-600 text-white p-1 rounded-sm">
+                Pay Now
+              </button>
             </form>
           </div>
         </div>
       </div>
+      {bookingModal && <BookingService bookingData={bookingData}  bookingModal={bookingModal} setBookingModal={setBookingModal}/>}
     </div>
   );
 };
