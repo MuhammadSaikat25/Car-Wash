@@ -43,14 +43,14 @@ const PaymentForm = ({ course }: Props) => {
       elements,
       redirect: "if_required",
     });
-    console.log(paymentIntent)
+    console.log(paymentIntent);
     if (error) {
       setMessage(error.message);
       setIsLoading(false);
     } else if (paymentIntent && paymentIntent.status === "succeeded" && user) {
       setIsLoading(false);
       toast.success("Slot booking  successful");
-      navigate("/payment-success");
+      navigate("/payment-success", { replace: true });
       crateOrder({
         courseId: course?.serviceId!,
         paymentInfo: paymentIntent,

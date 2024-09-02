@@ -15,7 +15,7 @@ const AllReviews = () => {
 
   return (
     <div className="pt-20">
-      hello
+      <p className="text-center my-2">What our client said</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {reviews?.map((review: any, i: number) => (
           <div key={i} className="border border-gray-500 p-1 rounded">

@@ -19,8 +19,8 @@ import UserBooking from "../pages/Dashboard/User/UserBooking";
 import NotFound from "../pages/NotFound";
 import PaymentSuccessful from "../pages/Booking/payment/PaymentSuccessful";
 import AllReviews from "../pages/AllReviews";
-import UserPrivate from "./privateRoute/Userprivate";
 import AdminPrivate from "./privateRoute/AdminPrivate";
+import UserPrivate from "./privateRoute/UserPrivate";
 
 const router = createBrowserRouter([
   {
