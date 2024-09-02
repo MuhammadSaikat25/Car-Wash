@@ -16,6 +16,11 @@ import UserHero from "../components/Dashboard/User/UserHero";
 import UserLayout from "../layout/UserLayout";
 import UserProfile from "../components/Dashboard/User/UserProfile";
 import UserBooking from "../pages/Dashboard/User/UserBooking";
+import NotFound from "../pages/NotFound";
+import PaymentSuccessful from "../pages/Booking/payment/PaymentSuccessful";
+import AllReviews from "../pages/AllReviews";
+import UserPrivate from "./privateRoute/Userprivate";
+import AdminPrivate from "./privateRoute/AdminPrivate";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +37,31 @@ const router = createBrowserRouter([
       },
       {
         path: "/service-details/:id",
-        element: <ServiceDetails />,
+        element: (
+          <UserPrivate>
+            <ServiceDetails />
+          </UserPrivate>
+        ),
       },
       {
         path: "/booking-page/:serviceId/:slots",
-        element: <BookingPage />,
+        element: (
+          <UserPrivate>
+            <BookingPage />
+          </UserPrivate>
+        ),
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccessful />,
+      },
+      {
+        path: "/all-reviews",
+        element: (
+          <UserPrivate>
+            <AllReviews />
+          </UserPrivate>
+        ),
       },
     ],
   },
@@ -58,19 +83,36 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin/service-management",
-        element: <ServiceManagement />,
+        element: (
+          <AdminPrivate>
+            <ServiceManagement />
+          </AdminPrivate>
+        ),
       },
       {
         path: "/admin/user-booking",
-        element: <AllBooking />,
+        element: (
+          <AdminPrivate>
+            <AllBooking />
+          </AdminPrivate>
+        ),
       },
       {
         path: "/admin/user-management",
-        element: <ManageUser />,
+        element: (
+          <AdminPrivate>
+            <ManageUser />
+          </AdminPrivate>
+        ),
       },
       {
         path: "/admin/manage-slot",
-        element: <ManageSlot />,
+        element: (
+          <AdminPrivate>
+            {" "}
+            <ManageSlot />
+          </AdminPrivate>
+        ),
       },
     ],
   },
@@ -80,17 +122,33 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/user/hero",
-        element: <UserHero />,
+        element: (
+          <UserPrivate>
+            <UserHero />
+          </UserPrivate>
+        ),
       },
       {
-        path:"/user/Profile",
-        element:<UserProfile/>
+        path: "/user/Profile",
+        element: (
+          <UserPrivate>
+            <UserProfile />
+          </UserPrivate>
+        ),
       },
       {
-        path:"/user/booking",
-        element:<UserBooking/>
-      }
+        path: "/user/booking",
+        element: (
+          <UserPrivate>
+            <UserBooking />
+          </UserPrivate>
+        ),
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

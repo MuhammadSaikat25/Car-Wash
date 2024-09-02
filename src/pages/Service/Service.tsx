@@ -3,6 +3,7 @@ import img from "../../assets/image_03.jpg";
 import { useGetServicesQuery } from "../../redux/feature/service/serviceApi";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { FaCheckDouble } from "react-icons/fa6";
 
 const Service = () => {
   const navigate = useNavigate();
@@ -95,9 +96,20 @@ const Service = () => {
                   />
                   <div className="p-2">
                     <p>{service.name}</p>
-                    <p>{service.description}</p>
+                    <p className="my-1">{service.description}</p>
                     <p>Duration {service.duration} mins</p>
-                    <p>Price: ${service?.price}</p>
+                    <p className="">Price: ${service?.price}</p>
+
+                    <div className="my-1">
+                      {service?.offers.map((offer: any) => (
+                        <div key={offer} className="flex items-center gap-x-1 ">
+                          <span>
+                            <FaCheckDouble size={10} />
+                          </span>
+                          {offer.offers}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <button
                     onClick={() => navigate(`/service-details/${service._id}`)}

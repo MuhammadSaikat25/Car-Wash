@@ -168,7 +168,7 @@ const ServiceDetails = () => {
 
           {selectedSlot?.length ? (
             <div
-              className="mt-4"
+              className="mt-4 bg-blue-600 text-white p-1 rounded-sm w-fit"
               onClick={() =>
                 navigate(
                   `/booking-page/${service._id}/${encodeURIComponent(

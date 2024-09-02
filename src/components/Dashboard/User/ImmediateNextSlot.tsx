@@ -6,29 +6,47 @@ const ImmediateNextSlot = () => {
   const { data } = useGetUserBookingQuery(undefined);
 
   const [nextBooking, setNextBooking] = useState<any>(null);
-  const [timeLeft, setTimeLeft] = useState<{ [key: string]: any }>({});
+  const [timeLeft, setTimeLeft] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     if (data?.data?.length > 0) {
-      const filteredBookings = data.data.filter((row: any) => {
-        const bookingDate = new Date(row?.slotId?.date);
-        const currentDate = new Date();
-        return bookingDate > currentDate;
-      });
+      const filteredBookings = data.data
+        .flatMap((row: any) =>
+          row.slotId.map((slot: any) => ({
+            ...slot,
+            serviceName: row.serviceId?.name,
+          }))
+        )
+        .filter((slot: any) => {
+          const slotDateTime = new Date(`${slot.date}T${slot.startTime}`);
+          const currentDateTime = new Date();
+          return slotDateTime > currentDateTime;
+        });
 
       const sortedBookings = filteredBookings.sort(
         (a: any, b: any) =>
-          new Date(a.slotId.date).getTime() - new Date(b.slotId.date).getTime()
+          new Date(`${a.date}T${a.startTime}`).getTime() -
+          new Date(`${b.date}T${b.startTime}`).getTime()
       );
 
-      setNextBooking(sortedBookings[0]);
+      setNextBooking(sortedBookings[0] || null);
     }
   }, [data]);
 
   useEffect(() => {
     if (nextBooking) {
       const intervalId = setInterval(() => {
-        const time = calculateTimeLeft(nextBooking?.slotId?.date);
+        const time = calculateTimeLeft(nextBooking.date, nextBooking.startTime);
         setTimeLeft(time);
       }, 1000);
 
@@ -36,32 +54,36 @@ const ImmediateNextSlot = () => {
     }
   }, [nextBooking]);
 
-  const calculateTimeLeft = (date: string) => {
-    const bookingDate = new Date(date);
-    const currentDate = new Date();
-    const diffInSeconds = differenceInSeconds(bookingDate, currentDate);
+  const calculateTimeLeft = (date: string, startTime: string) => {
+    const [hours, minutes] = startTime.split(":").map(Number);
+    const bookingDateTime = new Date(date);
+    bookingDateTime.setHours(hours, minutes, 0, 0);
+
+    const currentDateTime = new Date();
+    const diffInSeconds = differenceInSeconds(bookingDateTime, currentDateTime);
 
     const days = Math.floor(diffInSeconds / (60 * 60 * 24));
-    const hours = Math.floor((diffInSeconds % (60 * 60 * 24)) / (60 * 60));
-    const minutes = Math.floor((diffInSeconds % (60 * 60)) / 60);
-    const seconds = diffInSeconds % 60;
+    const hoursLeft = Math.floor((diffInSeconds % (60 * 60 * 24)) / (60 * 60));
+    const minutesLeft = Math.floor((diffInSeconds % (60 * 60)) / 60);
+    const secondsLeft = diffInSeconds % 60;
 
-    return { days, hours, minutes, seconds };
+    return {
+      days,
+      hours: hoursLeft,
+      minutes: minutesLeft,
+      seconds: secondsLeft,
+    };
   };
 
   return (
     <div>
-      {nextBooking ? (
-        <div className="">
-          {/* <p>Service: {nextBooking?.serviceId?.name}</p>
-          <p>Booking Date: {nextBooking?.slotId?.date}</p> */}
+      {nextBooking && (
+        <div className= "text-white md:text-gray-950">
           <p className="text-gray-950">
-          Next slot: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
+            Next slot: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
             {timeLeft.seconds}s
           </p>
         </div>
-      ) : (
-        <p></p>
       )}
     </div>
   );

@@ -7,6 +7,7 @@ const bookingApi = baseApi.injectEndpoints({
         return {
           url: "/bookings",
           credentials: "include",
+          method: "GET",
         };
       },
     }),
@@ -38,11 +39,12 @@ const bookingApi = baseApi.injectEndpoints({
       },
     }),
     crateOrder: builder.mutation({
-      query : ({ paymentInfo }) => {
+      query : ({ paymentInfo,BookingInfo }) => {
         return {
           url: "/bookings",
           method: "POST",
           body: {
+            BookingInfo,
             paymentInfo,
           },
           credentials: "include",

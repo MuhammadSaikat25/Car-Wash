@@ -49,9 +49,9 @@ console.log(rows)
                   {row.serviceId.duration} mins
                 </TableCell>
                 <TableCell align="right">{row?.serviceId?.name} </TableCell>
-                <TableCell align="right">{row?.slotId?.map((a)=>(<p key={a} className=" flex flex-col"> {a.date}</p>))} </TableCell>
-                <TableCell align="right">{row?.slotId?.map((a)=>(<p key={a} className=" flex flex-col"> {a.startTime}</p>))}  </TableCell>
-                <TableCell align="right">{row?.slotId?.map((a)=>(<p key={a} className=" flex flex-col"> {a.endTime}</p>))}  </TableCell>
+                <TableCell align="right">{row?.slotId?.map((a:any)=>(<p key={a} className=" flex flex-col"> {a.date}</p>))} </TableCell>
+                <TableCell align="right">{row?.slotId?.map((a:any)=>(<p key={a} className=" flex flex-col"> {a.startTime}</p>))}  </TableCell>
+                <TableCell align="right">{row?.slotId?.map((a:any)=>(<p key={a} className=" flex flex-col"> {a.endTime}</p>))}  </TableCell>
               </TableRow>
             ))}
           </TableBody>

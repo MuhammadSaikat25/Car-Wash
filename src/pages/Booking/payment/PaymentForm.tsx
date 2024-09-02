@@ -28,10 +28,11 @@ const PaymentForm = ({ course }: Props) => {
   const [crateOrder, { data: orderData, error }] = useCrateOrderMutation();
   const [isLoading, setIsLoading] = useState(false);
 
-  const paymentInfo = {
+  const BookingInfo = {
     serviceId: course?.serviceId,
     slotId: course?.bookingTime.map((slot: any) => slot._id),
   };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!stripe || !elements) {
@@ -42,17 +43,18 @@ const PaymentForm = ({ course }: Props) => {
       elements,
       redirect: "if_required",
     });
-
+    console.log(paymentIntent)
     if (error) {
       setMessage(error.message);
       setIsLoading(false);
     } else if (paymentIntent && paymentIntent.status === "succeeded" && user) {
       setIsLoading(false);
       toast.success("Slot booking  successful");
-      // navigate("/my-class");
+      navigate("/payment-success");
       crateOrder({
         courseId: course?.serviceId!,
-        paymentInfo,
+        paymentInfo: paymentIntent,
+        BookingInfo,
       });
       refetch();
     }
@@ -68,7 +70,7 @@ const PaymentForm = ({ course }: Props) => {
       }
     }
   }, [orderData, error]);
-console.log(orderData)
+  console.log(orderData);
   return (
     <div className="text-black">
       <Toaster />

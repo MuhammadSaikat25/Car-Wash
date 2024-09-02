@@ -10,7 +10,7 @@ import { RootState } from "../../redux/store";
 import { IoLocation } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import { IoTime } from "react-icons/io5";
-import { loadStripe } from "@stripe/stripe-js";
+
 import BookingService from "./payment/BookingService";
 import asset from "../../assets/Asset.png";
 
@@ -57,11 +57,7 @@ const BookingPage = () => {
 
   return (
     <div className="pt-[62px]">
-      <img
-        src={service?.image || img}
-        className="w-full h-[250px] object-cover"
-        alt=""
-      />
+      <img src={img} className="w-full h-[250px] object-cover" alt="" />
       <div
         className="bg-[#015496] pt-10"
         style={{ backgroundImage: `url(${asset})` }}
@@ -159,7 +155,13 @@ const BookingPage = () => {
           </div>
         </div>
       </div>
-      {bookingModal && <BookingService bookingData={bookingData}  bookingModal={bookingModal} setBookingModal={setBookingModal}/>}
+      {bookingModal && (
+        <BookingService
+          bookingData={bookingData}
+          bookingModal={bookingModal}
+          setBookingModal={setBookingModal}
+        />
+      )}
     </div>
   );
 };

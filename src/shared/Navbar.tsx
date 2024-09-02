@@ -58,7 +58,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
             }
-            to={"s"}
+            to={"/contact"}
           >
             Contact
           </NavLink>
@@ -70,14 +70,7 @@ const Navbar = () => {
           >
             Services
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${isActive ? "text-[#FFAF00]" : ""} hover:text-red-500`
-            }
-            to={"w"}
-          >
-            Booking
-          </NavLink>
+
           <div className="relative cursor-pointer ">
             {user ? (
               <FaRegUserCircle size={20} onClick={() => setModal(!modal)} />
@@ -122,13 +115,13 @@ const Navbar = () => {
           <ImmediateNextSlot />
         </div>
       </div>
-      <div className={`md:hidden fixed flex items-center justify-between top-0 w-full  ${
+      <div
+        className={`md:hidden fixed flex items-center justify-between top-0 w-full  ${
           pathname == "/" && "duration-300"
         } ${
-          pathname !== "/" || scroll >= 80
-            ? "bg-[#015496] "
-            : "bg-transparent"
-        }`}>
+          pathname !== "/" || scroll >= 80 ? "bg-[#015496] " : "bg-transparent"
+        }`}
+      >
         <img className="" src={logo} alt="" />
         <span onClick={() => setOpenNave(true)}>
           <MdOutlineMenu />

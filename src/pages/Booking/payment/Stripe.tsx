@@ -21,7 +21,7 @@ const Stripe = ({ bookingData }: Props) => {
   const { data: course } = useGetSingleServiceQuery(bookingData.serviceId!, {
     skip: !bookingData,
   });
-  const [cratePayment, { data: paymentData, error }] =
+  const [cratePayment, { data: paymentData }] =
     useCratePaymentMutation();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Stripe = ({ bookingData }: Props) => {
       setClintSecret(paymentData.client_secret);
     }
   }, [paymentData]);
-
+  
   return (
     <div>
       {clientSecret && stripePromise && (
